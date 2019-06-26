@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="600" height="155" viewBox="0 0 600 155">
+  <defs>
+    <clipPath id="clip-CocosCoreLogo">
+      <rect width="600" height="155"/>
+    </clipPath>
+  </defs>
+  <g id="CocosCoreLogo" clip-path="url(#clip-CocosCoreLogo)">
+    <g id="food-coconut-svgrepo-com" transform="translate(64.073 8.613)">
+      <path id="Path_1" data-name="Path 1" d="M63.655,202.3H58.714v4.941h4.941ZM51.3,185h7.411v-4.941H51.3Zm82.761,46.445-2.718-4.2-7.411,4.941,2.718,4.2ZM56.243,227h4.941v-4.941H56.243Zm-2.47-34.587H48.832v4.941h4.941ZM68.6,197.357h4.941v-4.941H68.6Zm64.233-27.175h7.411v-4.941h-7.411Zm24.7,24.7A59.227,59.227,0,0,1,131.1,244.3H65.384a59.227,59.227,0,0,1-26.434-49.41,60.079,60.079,0,0,1,5.435-24.7h83.5v-4.941H46.856a33.933,33.933,0,0,1,3.212-4.941h96.349a33.935,33.935,0,0,1,3.212,4.941h-4.447v4.941H152.1A60.08,60.08,0,0,1,157.533,194.887Zm-20.505,34.093c20.505-18.035,13.341-50.4,13.094-51.88l-4.941.988c0,.247,6.917,30.881-11.611,46.939ZM93.3,197.357v-4.941H88.36v4.941ZM88.36,227v-4.941H80.948V227Zm-7.411-42v-4.941H76.007V185Zm-4.941,29.646V209.71H71.066v4.941Z" transform="translate(-25.989 -110.798)" fill="#c96"/>
+      <g id="Group_1" data-name="Group 1" transform="translate(89.793 8.492)">
+        <path id="Path_2" data-name="Path 2" d="M287.75,46.276A22.47,22.47,0,0,1,303.067,27.5a34.715,34.715,0,0,0-7.906,18.776Z" transform="translate(-287.75 -27.5)" fill="#f90"/>
+        <path id="Path_3" data-name="Path 3" d="M389.256,46.276A34.715,34.715,0,0,0,381.35,27.5a22.47,22.47,0,0,1,15.317,18.776Z" transform="translate(-352.445 -27.5)" fill="#f90"/>
+      </g>
+      <path id="Path_4" data-name="Path 4" d="M336.832,27.5c2.965,2.718,8.894,9.635,9.882,18.776H326.95C327.938,37.135,333.867,30.218,336.832,27.5Z" transform="translate(-225.051 -19.008)" fill="#ff5400"/>
+      <g id="Group_2" data-name="Group 2" transform="translate(1.35 0)">
+        <path id="Path_5" data-name="Path 5" d="M362.455,214.7c.247,1.482,7.411,33.846-13.094,51.88l-3.212-3.706c18.529-16.058,11.611-46.692,11.611-46.939Z" transform="translate(-239.672 -148.398)" fill="#42210b"/>
+        <rect id="Rectangle_1" data-name="Rectangle 1" width="7.411" height="4.941" transform="translate(105.49 54.443)" fill="#42210b"/>
+        <path id="Path_6" data-name="Path 6" d="M322.362,377.9l2.47,3.953-7.411,4.941-2.471-3.953Z" transform="translate(-218.107 -261.201)" fill="#42210b"/>
+        <rect id="Rectangle_2" data-name="Rectangle 2" width="4.941" height="4.941" transform="translate(61.021 81.619)" fill="#42210b"/>
+        <rect id="Rectangle_3" data-name="Rectangle 3" width="7.411" height="4.941" transform="translate(53.609 111.264)" fill="#42210b"/>
+        <rect id="Rectangle_4" data-name="Rectangle 4" width="4.941" height="4.941" transform="translate(48.669 69.266)" fill="#42210b"/>
+        <rect id="Rectangle_5" data-name="Rectangle 5" width="4.941" height="4.941" transform="translate(43.728 98.912)" fill="#42210b"/>
+        <rect id="Rectangle_6" data-name="Rectangle 6" width="4.941" height="4.941" transform="translate(41.257 81.619)" fill="#42210b"/>
+        <rect id="Rectangle_7" data-name="Rectangle 7" width="4.941" height="4.941" transform="translate(31.375 91.501)" fill="#42210b"/>
+        <rect id="Rectangle_8" data-name="Rectangle 8" width="4.941" height="4.941" transform="translate(28.905 111.264)" fill="#42210b"/>
+        <rect id="Rectangle_9" data-name="Rectangle 9" width="7.411" height="4.941" transform="translate(23.964 69.266)" fill="#42210b"/>
+        <rect id="Rectangle_10" data-name="Rectangle 10" width="4.941" height="4.941" transform="translate(21.493 81.619)" fill="#42210b"/>
+        <path id="Path_7" data-name="Path 7" d="M104.863,8.492A22.47,22.47,0,0,0,89.546,27.268h7.411C97.7,19.362,101.652,12.692,104.863,8.492Zm28.9,18.776A22.47,22.47,0,0,0,118.451,8.492a34.715,34.715,0,0,1,7.906,18.776Zm-21.987-24.7a27.1,27.1,0,0,1,27.175,27.175,2.657,2.657,0,0,1-2.47,2.47H114.251V44.561h7.411a2.247,2.247,0,0,1,1.976.988,63.437,63.437,0,0,1,12.847,38.54,64.284,64.284,0,0,1-29.4,53.857c-.494.247-.741.494-1.235.494h-67.2a1.887,1.887,0,0,1-1.235-.494,64.107,64.107,0,0,1-16.552-92.4,2.247,2.247,0,0,1,1.976-.988H31.49L16.667,6.763,4.562,16.892,1.35,13.186,16.173.834a2.37,2.37,0,0,1,2.47-.741,2.612,2.612,0,0,1,1.729,1.482L36.925,44.561H50.76l9.388-23.223a2.612,2.612,0,0,1,1.729-1.482A1.992,1.992,0,0,1,64.1,20.6l9.882,9.882-3.459,3.459-7.164-7.164L56.195,44.561H109.31V32.209H87.076a2.657,2.657,0,0,1-2.47-2.47A27.1,27.1,0,0,1,111.781,2.563Zm11.858,51.88a33.934,33.934,0,0,0-3.212-4.941H24.078a33.931,33.931,0,0,0-3.212,4.941H101.9v4.941H18.4a60.079,60.079,0,0,0-5.435,24.7A59.227,59.227,0,0,0,39.4,133.5h65.468a58.861,58.861,0,0,0,26.681-49.41,60.079,60.079,0,0,0-5.435-24.7h-6.917V54.443h4.447ZM111.781,8.492c-2.965,2.718-8.894,9.635-9.882,18.776h19.764C120.674,18.127,114.745,11.21,111.781,8.492Z" transform="translate(-1.35 0)" fill="#42210b"/>
+      </g>
+      <g id="Group_3" data-name="Group 3" transform="translate(20.867 49.502)">
+        <path id="Path_8" data-name="Path 8" d="M284.712,194.887a60.08,60.08,0,0,0-5.435-24.7H272.36v-4.941h4.447a33.934,33.934,0,0,0-3.212-4.941H260.007s.741,1.729,1.729,4.941h5.682v4.941h-4.447c3.953,18.282,6.423,57.315-40.022,74.115h35.328A59.227,59.227,0,0,0,284.712,194.887Zm-12.352-16.8,4.694-.988c.247,1.235,7.411,33.846-13.093,51.88l-3.212-3.706C279.277,208.968,272.36,178.335,272.36,178.087Zm-21,54.351,7.411-4.941,2.717,4.2-7.411,4.941Z" transform="translate(-174.034 -160.3)" fill="#b37d4d"/>
+        <path id="Path_9" data-name="Path 9" d="M69,160.3H67.762a33.935,33.935,0,0,0-3.212,4.941h2.965C68.009,163.512,68.5,161.782,69,160.3Z" transform="translate(-64.55 -160.3)" fill="#b37d4d"/>
+      </g>
+      <path id="Path_10" data-name="Path 10" d="M48.585,192.3h-4.2A60.079,60.079,0,0,0,38.95,217a59.227,59.227,0,0,0,26.434,49.41h5.682C40.926,249.615,43.644,213.793,48.585,192.3Z" transform="translate(-25.989 -132.916)" fill="#e4c6a1"/>
+    </g>
+    <text id="CocosCore" transform="translate(248 100)" fill="#42210b" font-size="60" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">CocosCore</tspan></text>
+  </g>
+</svg>
