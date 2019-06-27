@@ -20,7 +20,7 @@ class DBManager {
     };
 
     async getUser(context, bot) {
-        let user = await this.User.findOne({ VKId: context.senderId });
+        let user = await this.User.findOne({ vkId: context.senderId });
 
         if (!user) {
             const [profile] = await bot.vk.api.users.get({
@@ -28,7 +28,7 @@ class DBManager {
             });
 
             user = new this.User({
-                VKId: context.senderId,
+                vkId: context.senderId,
                 nickname: profile.first_name,
                 regDate: Utils.getDateString()
             });

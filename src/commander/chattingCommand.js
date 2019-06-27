@@ -3,7 +3,7 @@ const request = require('../plugins/request');
 
 module.exports = new Command({
     trigger: /^[^]+$/i,
-    async handler(ctx, bot) {        
+    async handler(ctx, bot) {
         /* let data = await request('http://isinkin-bot-api.herokuapp.com/1/talk', {
             method: 'POST',
             form: {
@@ -29,7 +29,8 @@ module.exports = new Command({
                 uid: '833feef7-4a56-4650-b770-7cd5b7868342'
             },
             json: true
-        });        
+        });
+
         ctx.send(data.text);
     }
 });
