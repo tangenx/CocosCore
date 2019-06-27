@@ -11,10 +11,11 @@ class Command {
         permission = 0
     }) {
         if (!trigger) throw new ConfigureError('Не указан триггер команды');
+
         this.trigger = trigger;
         this.name = name;
         this.description = description;
-        
+
         if (!handler) throw new ConfigureError('Не указан обработчик команды');
         if (typeof handler !== 'function') throw new ConfigureError('Обработчик команды не является функцией');
 
@@ -27,7 +28,6 @@ class Command {
     get [Symbol.toStringTag]() {
         return 'Command';
     };
-
 
     searchSubCommand(context) {
         if (!this.commands.length) return this;

@@ -7,6 +7,7 @@ async function messageHandler(context, bot) {
     let startTime = Date.now();
 
     context.gamemodeUser = bot.gamemodeUsers.get(context.senderId);
+
     if (!context.gamemodeUser) {
         bot.gamemodeUsers.set(context.senderId, false);
         context.gamemodeUser = false;
@@ -14,7 +15,7 @@ async function messageHandler(context, bot) {
 
     if (context.isChat && !context.gamemodeUser && !bot.trigger.test(context.text)) return;
 
-    if (bot.db) context.user = await bot.db.getUser(context, bot);    
+    if (bot.db) context.user = await bot.db.getUser(context, bot);
     if (context.isChat && bot.db) context.chat = await bot.db.getChat(context.chatId);
 
     if (bot.trigger.test(context.text) && context.isChat) {
@@ -25,10 +26,10 @@ async function messageHandler(context, bot) {
         let message = `${!params.emoji ? '' : `${params.emoji} `}`;
         if (context.isChat) {
             if (context.user) {
-                message += `${context.user.mention ? `[id${context.user.VKId}|${context.user.nickname}]` : context.user.nickname}, ${!text ? text : `${text[0].toLowerCase()}${text.slice(1)}`}`;
+                message += `${context.user.mention ? `[id${context.user.vkId}|${context.user.nickname}]` : context.user.nickname}, ${!text ? text : `${text[0].toLowerCase()}${text.slice(1)}`}`;
             } else {
                 message += text;
-            }   
+            }
         } else {
             message += `${!text ? text : `${text[0].toUpperCase()}${text.slice(1)}`}`;
         }
@@ -70,9 +71,10 @@ async function messageHandler(context, bot) {
     if (context.user && command.permission > context.user.permission) return context.error('недостаточно прав для выполнения команды.');
 
     try {
-        await command.handler(context, bot);  
+        await command.handler(context, bot);
     } catch (error) {
         context.error('произошла непредвиденная ошибка.');
+
         if (bot.developerId) {
             bot.vk.api.messages.send({
                 peer_id: bot.developerId,

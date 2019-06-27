@@ -29,4 +29,4 @@ declare class CocosCoreBot {
     startListener(): void;
 }
 
-export { CocosCoreBot, Command, Utils };   
+export { CocosCoreBot, Command, Utils };

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const chatSchema = mongoose.Schema({
-    id: Number 
+    id: Number
 });
 
 const Chat = mongoose.model('Chat', chatSchema);

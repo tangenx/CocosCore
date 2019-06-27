@@ -38,7 +38,7 @@ class CocosCoreBot {
     get [Symbol.toStringTag]() {
         return 'CocosCoreBot';
     };
-    
+
     async configure() {
         if (!this.token) throw new ConfigureError('Не указан токен бота');
         this.vk = new VK({
@@ -47,11 +47,11 @@ class CocosCoreBot {
             token: this.token
         });
 
-        await this.vk.updates.start();      
+        await this.vk.updates.start();
 
         if (!this.groupId) this.groupId = this.vk.options.pollingGroupId;
         if (this.groupId < 0) this.groupId = -this.groupId;
-        if (this.vk.options.pollingGroupId !== this.groupId) this.groupId = this.vk.options.pollingGroupId;        
+        if (this.vk.options.pollingGroupId !== this.groupId) this.groupId = this.vk.options.pollingGroupId;
 
         if (!this.commandsDir) throw new ConfigureError('Не указана директория команд');
         this.commander = new Commander();

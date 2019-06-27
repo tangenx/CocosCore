@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const userSchema = mongoose.Schema({
-    VKId: Number,
+    vkId: Number,
     nickname: String,
     balance: {
         type: Number,
