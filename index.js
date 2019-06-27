@@ -63,7 +63,7 @@ class CocosCoreBot {
 
         if (this.aliases.length > 0) this.gamemodeUsers = new Map();
 
-        this.trigger = new RegExp(`${this.aliasesFromStart ? '^' : ''}(?:\\[club${this.groupId}\\|(?:.*)\\]${this.aliases.length == 0 ? '' : `|${this.aliases.join('|')}`})[\\s,]*`, 'i');
+        this.trigger = new RegExp(`${this.aliasesFromStart ? '^' : ''}(?:\\[club${this.groupId}\\|(?:.*)\\]${this.aliases.length === 0 ? '' : `|${this.aliases.join('|')}`})[\\s,]*`, 'i');
 
         this.logger.ok('Сконфигурировано.');
     };
@@ -85,6 +85,6 @@ class CocosCoreBot {
 
         this.logger.ok('Бот на ядре СocosСore успешно запущен.');
     };
-};
+}
 
 module.exports = { CocosCoreBot, Command, Utils };

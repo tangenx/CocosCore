@@ -36,12 +36,12 @@ class Command {
 
         for (const subCommand of this.commands) {
             if (subCommand.trigger.test(context.text)) command = subCommand;
-        };
+        }
 
         if (!command) return this;
 
         return command;
     };
-};
+}
 
 module.exports = Command;

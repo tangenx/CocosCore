@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
+const { Schema, model } = require('mongoose');
 
-const chatSchema = mongoose.Schema({
+const chatSchema = new Schema({
     id: Number
 });
 
-const Chat = mongoose.model('Chat', chatSchema);
+const Chat = model('Chat', chatSchema);
 
 module.exports = Chat;

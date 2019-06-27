@@ -1,14 +1,13 @@
 export default class Utils {
-    static getTimeString(): string;
+    public static getTimeString(): string;
 
-    static getDateString(): string;
+    public static getDateString(): string;
 
-    static getRandomInRange(min: number, max: number): number;
+    public static getRandomInRange(min: number, max: number): number;
 
-    static getBuffer(url: string): Promise<Buffer>;
+    public static getBuffer(url: string): Promise<Buffer>;
 
-    static declOfNum(number: number, titles: Array<string>): string;
+    public static declOfNum(number: number, titles: Array<string>): string;
 
-    static getRandomElement(arr: Array<any>): any;
+    public static getRandomElement(arr: Array<any>): any;
 }
-

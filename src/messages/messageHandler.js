@@ -43,7 +43,7 @@ async function messageHandler(context, bot) {
     };
 
     context.error = function(text = '', params = {}) {
-        context.send(text, Object.assign(params, { emoji: '❌' }))
+        context.send(text, Object.assign(params, { emoji: '❌' }));
     };
 
     context.sendOrig = function(text = '', params = {}) {
@@ -89,6 +89,6 @@ async function messageHandler(context, bot) {
     let endTime = Date.now();
 
     bot.logger.log(`${Utils.getTimeString()} [${context.isChat ? `chat #${context.chatId}` : 'личка'}] ${context.senderId} => ${context.text} (${endTime - startTime} ms.)`);
-};
+}
 
 module.exports = messageHandler;

@@ -6,27 +6,27 @@ import Commander from './typings/commander';
 import Utils from './typings/utils';
 
 declare class CocosCoreBot {
+    private commander: Commander;
+    public vk: VK;
+    public logger: Logger;
+    private trigger: RegExp;
+
     constructor(params: Params.IBotConfigure);
-
-    commander: Commander;
-    vk: VK;
-    logger: Logger;
-    trigger: RegExp;
-
+    
     /**
      * Конфигурирование бота
      */
-    configure(): Promise<void>;
+    public configure(): Promise<void>;
 
     /**
      * Подключение MongoDB к боту
      */
-    connectMongoDB(): Promise<void>;
+    public connectMongoDB(): Promise<void>;
 
     /**
      * Запуск "прослушки" сообщений
      */
-    startListener(): void;
+    public startListener(): void;
 }
 
 export { CocosCoreBot, Command, Utils };

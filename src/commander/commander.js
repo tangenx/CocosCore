@@ -1,5 +1,9 @@
 const fs = require('fs');
-const ConfigureError = require('../errors/configureError')
+const glob = require('glob');
+const { promisify } = require('util');
+const ConfigureError = require('../errors/configureError');
+
+const findFiles = promisify(glob);
 
 class Commander {
     constructor() {
@@ -7,37 +11,21 @@ class Commander {
     };
 
     async loadCommands(dir) {
-        const path = await fs.promises.realpath(dir);
-        const files = await fs.promises.readdir(dir);
+        const absolutePath = await fs.promises.realpath(dir);
+        const filePaths = await findFiles(`${absolutePath}/**/*.js`);
 
-        let foundFiles = files.filter(x => x.endsWith('.js'))
+        for (const filePath of filePaths) {
+            let file = require(filePath);
 
-        for (const file of foundFiles) {
-            const requiredFile = require(`${path}/${file}`);
+            if (Object.keys(file).length === 0) continue;
 
-            if (Object.keys(requiredFile).length === 0) continue;
+            if (!Array.isArray(file)) file = [file];
 
-            if (Array.isArray(requiredFile)) {
-                for (const element of requiredFile) {
-                    if (element[Symbol.toStringTag] !== 'Command') throw new ConfigureError(`Эскпортируемые данные в файле ${file} не являются командой`);
-                    this.commands.push(element);
-                };
-            } else {
-                if (requiredFile[Symbol.toStringTag] !== 'Command') throw new ConfigureError(`Эскпортируемые данные в файле ${file} не являются командой`);
-                this.commands.push(requiredFile);
+            for (const element of file) {
+                if (element[Symbol.toStringTag] !== 'Command') throw new ConfigureError(`Эскпортируемые данные в файле ${filePath} не являются командой`);
+                this.commands.push(element);
             }
-        };
-
-        if (~files.findIndex(x => !x.endsWith('.js'))) {
-            let foundFolders = files.filter(x => !x.endsWith('.js'));
-            await Promise.all(
-                foundFolders.map(
-                    async (folder) => {
-                        await this.loadCommands(`${dir}/${folder}`);
-                    }
-                )
-            );
-        };
+        }
     };
 
     findCommand(context) {
@@ -55,6 +43,6 @@ class Commander {
 
         return command;
     };
-};
+}
 
 module.exports = Commander;

@@ -112,15 +112,15 @@ declare class Message extends MessageContext {
     /**
      * Аргументы, обработанные триггером команды
      */
-    body: Array<string>;
+    public body: Array<string>;
 
-    send(text?: string, params?: IMessageParams): Promise<number>;
+    public send(text?: string, params?: IMessageParams): Promise<number>;
 
-    error(text?: string, params?: IMessageParams): Promise<number>;
+    public error(text?: string, params?: IMessageParams): Promise<number>;
 
-    sendOrig(text?: string, params?: IMessageParams): Promise<number>;
+    public sendOrig(text?: string, params?: IMessageParams): Promise<number>;
 
-    sendSticker(id: number): Promise<number>;
+    public sendSticker(id: number): Promise<number>;
 }
 
 export interface IBotConfigure {

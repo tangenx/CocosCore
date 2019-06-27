@@ -51,6 +51,6 @@ class DBManager {
 
         return chat;
     };
-};
+}
 
 module.exports = DBManager;

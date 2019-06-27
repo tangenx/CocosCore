@@ -4,13 +4,13 @@ class Utils {
     static getTimeString() {
         let date = new Date();
 
-        return `${date.toLocaleTimeString('ru-RU')}`;
+        return date.toLocaleTimeString('ru-RU');
     };
 
     static getDateString() {
         let date = new Date();
 
-        return `${date.toLocaleDateString('ru-RU')}`;
+        return date.toLocaleDateString('ru-RU');
     };
 
     static getRandomInRange(min, max) {
@@ -38,6 +38,17 @@ class Utils {
     static getRandomElement(arr) {
         return arr[Math.floor(Math.random() * arr.length)];
     };
-};
+
+    static flat(array, depth = 1) {
+        depth = Number.isNaN(depth) ? 0 : Math.floor(depth);
+        if (depth < 1) return array.slice();
+
+        return [].concat(
+            ...(depth < 2)
+            ? array
+            : array.map(v => Array.isArray(v) ? v.flat(depth - 1) : v)
+        );
+    };
+}
 
 module.exports = Utils;

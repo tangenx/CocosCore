@@ -1,6 +1,6 @@
 {
   "name": "cocoscore",
-  "version": "1.0.0-rc.1",
+  "version": "1.0.0-rc.2",
   "description": "VK Bot core, based on vk-io module",
   "main": "./index.js",
   "types": "./index.d.ts",
@@ -23,12 +23,15 @@
   "homepage": "https://github.com/TGXed/CocosCore#readme",
   "dependencies": {
     "form-data": "^2.4.0",
-    "fs": "0.0.1-security",
+    "glob": "^7.1.4",
     "mongoose": "^5.6.1",
     "node-fetch": "^2.6.0",
-    "npm": "^6.9.1",
+    "npm": "^6.9.2",
     "querystring": "^0.2.0",
     "vk-io": "^4.0.0-rc.19",
     "xml2js": "^0.4.19"
+  },
+  "devDependencies": {
+    "eslint": "^6.0.1"
   }
 }

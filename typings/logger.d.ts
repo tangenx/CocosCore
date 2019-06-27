@@ -4,14 +4,13 @@ export default class Logger {
      */
     constructor(directory: string);
 
-    log(...message: any): void;
+    public log(...message: any): void;
 
-    ok(...message: any): void;
+    public ok(...message: any): void;
 
-    error(...message: any): void;
+    public error(...message: any): void;
 
-    warn(...message: any): void;
+    public warn(...message: any): void;
 
-    info(...message: any): void;
+    public info(...message: any): void;
 }
-
