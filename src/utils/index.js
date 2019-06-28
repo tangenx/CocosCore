@@ -27,10 +27,10 @@ class Utils {
 
         return titles[
             (
-                number % 100 > 4 &&
-                number % 100 < 20
+                num % 100 > 4 &&
+                num % 100 < 20
             ) ? 2 : cases[
-                    (number % 10 < 5) ? number % 10 : 5
+                    (num % 10 < 5) ? num % 10 : 5
                 ]
         ];
     }
