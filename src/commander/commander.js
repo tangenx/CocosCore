@@ -8,7 +8,7 @@ const findFiles = promisify(glob);
 class Commander {
     constructor() {
         this.commands = [];
-    };
+    }
 
     async loadCommands(dir) {
         const absolutePath = await fs.promises.realpath(dir);
@@ -26,14 +26,14 @@ class Commander {
                 this.commands.push(element);
             }
         }
-    };
+    }
 
     findCommand(context) {
         let foundCommand;
 
         for (const command of this.commands) {
             if (command.trigger.test(context.text)) foundCommand = command;
-        };
+        }
 
         if (!foundCommand) return null;
 
@@ -42,7 +42,7 @@ class Commander {
         context.body = context.text.match(command.trigger);
 
         return command;
-    };
+    }
 }
 
 module.exports = Commander;

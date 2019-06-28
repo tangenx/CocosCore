@@ -33,11 +33,11 @@ class CocosCoreBot {
         this.logsDir = logsDirectory;
         this.commandsDir = commandsDirectory;
         this.logger = new Logger(!this.logsDir ? null : `${this.logsDir}/${Utils.getDateString()}.txt`);
-    };
+    }
 
     get [Symbol.toStringTag]() {
         return 'CocosCoreBot';
-    };
+    }
 
     async configure() {
         if (!this.token) throw new ConfigureError('Не указан токен бота');
@@ -58,15 +58,15 @@ class CocosCoreBot {
         await this.commander.loadCommands(this.commandsDir);
 
         if (!Array.isArray(this.aliases)) {
-            this.aliases = this.aliases.split(/\,\s*/);
-        }
+            this.aliases = this.aliases.split(/,\s*/);
+        }        
 
         if (this.aliases.length > 0) this.gamemodeUsers = new Map();
 
         this.trigger = new RegExp(`${this.aliasesFromStart ? '^' : ''}(?:\\[club${this.groupId}\\|(?:.*)\\]${this.aliases.length === 0 ? '' : `|${this.aliases.join('|')}`})[\\s,]*`, 'i');
 
         this.logger.ok('Сконфигурировано.');
-    };
+    }
 
     async connectMongoDB(url) {
         if (!url) throw new ReferenceError('Не указан URL к базе данных');
@@ -76,7 +76,7 @@ class CocosCoreBot {
         await this.db.connect();
 
         this.logger.ok('База данных подключена.');
-    };
+    }
 
     startListener() {
         this.vk.updates.on(['new_message'], async (context) => {
@@ -84,7 +84,7 @@ class CocosCoreBot {
         });
 
         this.logger.ok('Бот на ядре СocosСore успешно запущен.');
-    };
+    }
 }
 
 module.exports = { CocosCoreBot, Command, Utils };

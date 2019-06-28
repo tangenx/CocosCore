@@ -4,19 +4,19 @@ const fetch = require('node-fetch');
 const FormData = require('form-data');
 
 module.exports = async function request(url, data = {}) {
-    if (typeof url === "object") {
+    if (typeof url === 'object') {
         data = { ...url };
         url = data.url;
         delete data.url;
     }
 
     data.headers = data.headers || {};
-    data.method = data.method || data.form ? "POST" : "GET";
+    data.method = data.method || data.form ? 'POST' : 'GET';
 
     if (data.form) {
         data.body = querystring.stringify(data.form);
         Object.assign(data.headers, {
-            "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+            'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
         });
     }
 

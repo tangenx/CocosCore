@@ -9,18 +9,18 @@ class DBManager {
         this.url = url;
         this.Chat = Chat;
         this.User = User;
-    };
+    }
 
     get [Symbol.toStringTag]() {
         return 'CocosCoreDB';
-    };
+    }
 
     async connect() {
         await mongoose.connect(this.url, { useNewUrlParser: true });
-    };
+    }
 
-    async getUser(context, bot) {
-        let user = await this.User.findOne({ vkId: context.senderId });
+    async getUser(senderId, bot) {
+        let user = await this.User.findOne({ vkId: senderId });
 
         if (!user) {
             const [profile] = await bot.vk.api.users.get({
@@ -28,7 +28,7 @@ class DBManager {
             });
 
             user = new this.User({
-                vkId: context.senderId,
+                vkId: senderId,
                 nickname: profile.first_name,
                 regDate: Utils.getDateString()
             });
@@ -37,7 +37,7 @@ class DBManager {
         }
 
         return user;
-    };
+    }
 
     async getChat(chatId) {
         let chat = await this.Chat.findOne({ id: chatId });
@@ -50,7 +50,7 @@ class DBManager {
         }
 
         return chat;
-    };
+    }
 }
 
 module.exports = DBManager;

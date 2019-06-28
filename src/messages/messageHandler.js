@@ -15,7 +15,7 @@ async function messageHandler(context, bot) {
 
     if (context.isChat && !context.gamemodeUser && !bot.trigger.test(context.text)) return;
 
-    if (bot.db) context.user = await bot.db.getUser(context, bot);
+    if (bot.db) context.user = await bot.db.getUser(context.senderId, bot);
     if (context.isChat && bot.db) context.chat = await bot.db.getChat(context.chatId);
 
     if (bot.trigger.test(context.text) && context.isChat) {
@@ -81,7 +81,7 @@ async function messageHandler(context, bot) {
                 message: `Ошибка в команде ${command.name}: \n${context.senderId} => ${context.text}\n${error.stack}`
             });
         }
-    };
+    }
 
     if (bot.db) await context.user.save();
     if (context.isChat && bot.db) await context.chat.save();

@@ -7,9 +7,9 @@ module.exports = new Command({
     emoji: '📜',
     handler(ctx, bot) {
         let commands = bot.commander.commands
-        .filter((command) => command.name)
-        .map((command) => `${command.emoji} ${command.name} -- ${command.description}`)
-        .join('\n');
+            .filter((command) => command.name)
+            .map((command) => `${command.emoji} ${command.name} -- ${command.description}`)
+            .join('\n');
 
         ctx.send(`Список команд бота:\n\n${commands}`, {
             emoji: '📜'

@@ -23,11 +23,11 @@ class Command {
         this.emoji = emoji;
         this.commands = commands;
         this.permission = permission;
-    };
+    }
 
     get [Symbol.toStringTag]() {
         return 'Command';
-    };
+    }
 
     searchSubCommand(context) {
         if (!this.commands.length) return this;
@@ -41,7 +41,7 @@ class Command {
         if (!command) return this;
 
         return command;
-    };
+    }
 }
 
 module.exports = Command;
