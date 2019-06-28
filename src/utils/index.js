@@ -22,7 +22,7 @@ class Utils {
         return response.buffer();
     }
 
-    static declOfNum(number, titles) {
+    static declOfNum(num, titles) {
         let cases = [2, 0, 1, 1, 1, 2];
 
         return titles[

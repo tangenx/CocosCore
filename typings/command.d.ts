@@ -1,5 +1,5 @@
-import { ICommandParams } from '../typings/params';
 import { MessageContext } from 'vk-io';
+import { ICommandParams } from '../typings/params';
 
 export default class Command {
     constructor(params: ICommandParams);

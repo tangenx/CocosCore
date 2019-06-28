@@ -24,7 +24,7 @@ class DBManager {
 
         if (!user) {
             const [profile] = await bot.vk.api.users.get({
-                user_ids: context.senderId
+                user_ids: senderId
             });
 
             user = new this.User({

@@ -1,4 +1,4 @@
-import { MessageContext, Keyboard } from 'vk-io';
+import { Keyboard, MessageContext } from 'vk-io';
 import { CocosCoreBot } from '../index';
 import Command from './command';
 
@@ -172,7 +172,7 @@ export interface IBotConfigure {
     /**
      * Директория, где расположены команды
      */
-    commandsDirectory: string
+    commandsDirectory: string;
 }
 
 export interface ICommandParams {
