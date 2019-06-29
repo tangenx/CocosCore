@@ -22,7 +22,7 @@ class Commander {
             if (!Array.isArray(file)) file = [file];
 
             for (const element of file) {
-                if (element[Symbol.toStringTag] !== 'Command') throw new ConfigureError(`Эскпортируемые данные в файле ${filePath} не являются командой`);
+                if (element[Symbol.toStringTag] !== 'Command') throw new ConfigureError(`Экспортируемые данные в файле ${filePath} не являются командой`);
                 this.commands.push(element);
             }
         }
