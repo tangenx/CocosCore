@@ -11,12 +11,20 @@ module.exports = [
         }
     }),
     new Command({
-        trigger: /^тест$/i,
+        trigger: /^тест(?:\s+(.*)|$)/i,
         name: 'тест',
         description: 'проверка работоспособности',
         emoji: '📡',
         handler(ctx) {
             ctx.send('Я в порядке!');
-        }
+        },
+        commands: [
+            new Command({
+                trigger: /^тост$/i,
+                handler(ctx) {
+                    ctx.send('тост');
+                }
+            })
+        ]
     })
 ];

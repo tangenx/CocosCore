@@ -21,12 +21,28 @@ const { CocosCoreBot, Command } = require('cocoscore');
 
 const bot = new CocosCoreBot({
     token: process.env.TOKEN,
-    aliases: ['test'],
+    aliases: ['бот', 'bot'],
     commandsDirectory: './commands',
-    chatBot: true
+    logsDirectory: './logs',
+    chatBot: true,
+    mongoURI: process.env.MONGOURI
 });
 
-bot.configure();
-bot.connectMongoDB(process.env.MONGOURI);
-bot.startListener();
+bot.start().catch(bot.logger.error);
+```
+
+## Пример простейшей команды
+
+```js
+const { Command } = require('cocoscore');
+
+module.exports = new Command({
+    trigger: /^тест$/i,
+    name: 'тест',
+    description: 'проверка работоспособности',
+    emoji: '📡',
+    handler(ctx) {
+        ctx.send('Я в порядке!');
+    }
+})
 ```

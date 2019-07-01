@@ -27,6 +27,11 @@ declare class CocosCoreBot {
      * Запуск "прослушки" сообщений
      */
     public startListener(): void;
+
+    /**
+     * Запуск бота
+     */
+    public start(): void;
 }
 
 export { CocosCoreBot, Command, Utils };

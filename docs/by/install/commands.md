@@ -36,7 +36,7 @@ new Command(options);
 | commands    | Command[] | Падкаманды                    | []           |
 | permission  | number    | Правы доступу да каманды      | 0            |
 
-## Примеры файлов команд
+## Прыклады файлаў каманд
 
 ```js
 module.exports = new Command({

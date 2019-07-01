@@ -2,6 +2,7 @@ const fs = require('fs');
 const glob = require('glob');
 const { promisify } = require('util');
 const ConfigureError = require('../errors/configureError');
+const Command = require('./command');
 
 const findFiles = promisify(glob);
 
@@ -22,13 +23,13 @@ class Commander {
             if (!Array.isArray(file)) file = [file];
 
             for (const element of file) {
-                if (element[Symbol.toStringTag] !== 'Command') throw new ConfigureError(`Экспортируемые данные в файле ${filePath} не являются командой`);
+                if (!(element instanceof Command)) throw new ConfigureError(`Экспортируемые данные в файле ${filePath} не являются командой`);
                 this.commands.push(element);
             }
         }
     }
 
-    findCommand(context) {
+    find(context) {
         let foundCommand;
 
         for (const command of this.commands) {
@@ -37,9 +38,9 @@ class Commander {
 
         if (!foundCommand) return null;
 
-        let command = foundCommand.searchSubCommand(context);
+        context.body = context.text.match(foundCommand.trigger);
 
-        context.body = context.text.match(command.trigger);
+        let command = foundCommand.searchSubCommand(context);
 
         return command;
     }

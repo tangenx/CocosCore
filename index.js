@@ -3,7 +3,7 @@ const Logger = require('./src/plugins/logger');
 const ConfigureError = require('./src/errors/configureError');
 const Utils = require('./src/utils/index');
 
-const Commander = require('./src/commander/commander');
+const Commander = require('./src/commander');
 const Command = require('./src/commander/command');
 
 const DBManager = require('./src/database/manager');
@@ -20,7 +20,8 @@ class CocosCoreBot {
         apiMode = 'sequential',
         apiLimit = 20,
         logsDirectory = null,
-        commandsDirectory = null
+        commandsDirectory = null,
+        mongoURI = null
     }) {
         this.token = token;
         this.groupId = groupId;
@@ -32,6 +33,8 @@ class CocosCoreBot {
         this.apiLimit = apiLimit;
         this.logsDir = logsDirectory;
         this.commandsDir = commandsDirectory;
+        this.mongoURI = mongoURI;
+
         this.logger = new Logger(!this.logsDir ? null : `${this.logsDir}/${Utils.getDateString()}.txt`);
     }
 
@@ -40,6 +43,8 @@ class CocosCoreBot {
     }
 
     async configure() {
+        if (this.isConfigured) return this.logger.warn('Бот уже сконфигурирован');
+
         if (!this.token) throw new ConfigureError('Не указан токен бота');
         this.vk = new VK({
             apiLimit: this.apiLimit,
@@ -59,31 +64,47 @@ class CocosCoreBot {
 
         if (!Array.isArray(this.aliases)) {
             this.aliases = this.aliases.split(/,\s*/);
-        }        
+        }
 
         if (this.aliases.length > 0) this.gamemodeUsers = new Map();
 
-        this.trigger = new RegExp(`${this.aliasesFromStart ? '^' : ''}(?:\\[club${this.groupId}\\|(?:.*)\\]${this.aliases.length === 0 ? '' : `|${this.aliases.join('|')}`})[\\s,]*`, 'i');
+        this.trigger = new RegExp(`${this.aliasesFromStart ? '^' : ''}(?:\\[club${this.groupId}\\|(?:.*)\\]${this.aliases.length === 0 ? '' : `|${this.aliases.join('|')}`})\\s*,?(\\s+|$)`, 'i');
 
+        this.isConfigured = true;
         this.logger.ok('Сконфигурировано.');
     }
 
     async connectMongoDB(url) {
-        if (!url) throw new ReferenceError('Не указан URL к базе данных');
-        if (typeof url !== 'string') throw new TypeError('URL должен быть строкой');
+        if (this.isMongoConnected) return this.logger.warn('MongoDB уже подключена');
 
-        this.db = new DBManager(url);
+        if (!url && !this.mongoURI) throw new ReferenceError('Не указан URL к базе данных');
+        if (!this.mongoURI) this.mongoURI = url;
+        if (typeof this.mongoURI !== 'string') throw new TypeError('URL должен быть строкой');
+
+        this.db = new DBManager(this.mongoURI);
         await this.db.connect();
 
+        this.isMongoConnected = true;
         this.logger.ok('База данных подключена.');
     }
 
     startListener() {
+        if (this.isStarted) return this.logger.warn('Бот уже запущен');
+
         this.vk.updates.on(['new_message'], async (context) => {
             await messageHandler(context, this);
         });
 
+        this.isStarted = true;
         this.logger.ok('Бот на ядре СocosСore успешно запущен.');
+    }
+
+    async start() {
+        if (!this.isConfigured) await this.configure();
+
+        if (this.mongoURI && !this.isMongoConnected) await this.connectMongoDB();
+
+        if (!this.isStarted) this.startListener();
     }
 }
 

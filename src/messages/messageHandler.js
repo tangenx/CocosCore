@@ -6,14 +6,16 @@ async function messageHandler(context, bot) {
 
     let startTime = Date.now();
 
-    context.gamemodeUser = bot.gamemodeUsers.get(context.senderId);
+    if (bot.gamemodeUsers) {
+        context.gamemodeUser = bot.gamemodeUsers.get(context.senderId);
+    }
 
-    if (!context.gamemodeUser) {
+    if (!context.gamemodeUser && bot.gamemodeUsers) {
         bot.gamemodeUsers.set(context.senderId, false);
         context.gamemodeUser = false;
     }
 
-    if (context.isChat && !context.gamemodeUser && !bot.trigger.test(context.text)) return;
+    if (context.isChat && !context.gamemodeUser && bot.gamemodeUsers && !bot.trigger.test(context.text)) return;
 
     if (bot.db) context.user = await bot.db.getUser(context.senderId, bot);
     if (context.isChat && bot.db) context.chat = await bot.db.getChat(context.chatId);
@@ -58,9 +60,9 @@ async function messageHandler(context, bot) {
         });
     };
 
-    let command = bot.commander.findCommand(context);
+    let command = bot.commander.find(context);
     if (!command) {
-        if (bot.chatBot) {
+        if (bot.chatBot && bot.gamemodeUsers && !context.gamemodeUser || context.gamemodeUser && !context.isChat) {
             command = chattingCommand;
         } else {
             if (context.isChat) return;
@@ -74,6 +76,7 @@ async function messageHandler(context, bot) {
         await command.handler(context, bot);
     } catch (error) {
         context.error('произошла непредвиденная ошибка.');
+        bot.logger.error(error);
 
         if (bot.developerId) {
             bot.vk.api.messages.send({

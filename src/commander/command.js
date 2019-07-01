@@ -34,11 +34,13 @@ class Command {
 
         let command;
 
-        for (const subCommand of this.commands) {
-            if (subCommand.trigger.test(context.text)) command = subCommand;
+        for (const subCommand of this.commands) {            
+            if (subCommand.trigger.test(context.body[1])) command = subCommand;
         }
 
         if (!command) return this;
+
+        context.body = context.body[1].match(command.trigger);
 
         return command;
     }

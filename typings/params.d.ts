@@ -110,6 +110,10 @@ interface IMessageParams {
 
 declare class Message extends MessageContext {
     /**
+     * Находится ли юзер в игровом режите (только при наличии алиасов)
+     */
+    public gamemodeUser: boolean;
+    /**
      * Аргументы, обработанные триггером команды
      */
     public body: Array<string>;
@@ -173,6 +177,11 @@ export interface IBotConfigure {
      * Директория, где расположены команды
      */
     commandsDirectory: string;
+
+    /**
+     * Адрес MongoDB сервера
+     */
+    mongoURI?: string;
 }
 
 export interface ICommandParams {

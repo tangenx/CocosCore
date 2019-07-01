@@ -1,4 +1,4 @@
-# Документация CocosCore
+# Дакументацыя CocosCore
 
 * [Усталяванне](install/install.md)
 * [Падключэнне каманд](install/commands.md)
