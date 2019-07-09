@@ -40,7 +40,7 @@ interface IMessageParams {
     /**
      * Идентификаторы получателей сообщения
      */
-    user_ids?: Array<number>;
+    user_ids?: number[];
 
     /**
      * Текст сообщения
@@ -116,7 +116,7 @@ declare class Message extends MessageContext {
     /**
      * Аргументы, обработанные триггером команды
      */
-    public body: Array<string>;
+    public body: string[];
 
     public send(text?: string, params?: IMessageParams): Promise<number>;
 
@@ -146,7 +146,7 @@ export interface IBotConfigure {
     /**
      * Обращения к боту
      */
-    aliases: Array<string>;
+    aliases: string[];
 
     /**
      * Обращение с начала сообщения
@@ -213,7 +213,7 @@ export interface ICommandParams {
     /**
      * Подкоманды
      */
-    commands?: Array<Command>;
+    commands?: Command[];
 
     /**
      * Права доступа к команде

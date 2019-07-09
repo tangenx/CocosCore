@@ -2,7 +2,7 @@ import { MessageContext } from 'vk-io';
 import Command from './command';
 
 export default class Commander {
-    public commands: Array<Command>;
+    public commands: Command[];
 
     /**
      * Загрузка команд в бота

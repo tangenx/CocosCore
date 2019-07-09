@@ -35,7 +35,7 @@ class CocosCoreBot {
         this.commandsDir = commandsDirectory;
         this.mongoURI = mongoURI;
 
-        this.logger = new Logger(!this.logsDir ? null : `${this.logsDir}/${Utils.getDateString()}.txt`);
+        this.logger = new Logger(!this.logsDir ? null : `${this.logsDir}/${Utils.getDateString()} ${Utils.getTimeString()}.txt`);
     }
 
     get [Symbol.toStringTag]() {
@@ -82,7 +82,6 @@ class CocosCoreBot {
         if (typeof this.mongoURI !== 'string') throw new TypeError('URL должен быть строкой');
 
         this.db = new DBManager(this.mongoURI);
-        await this.db.connect();
 
         this.isMongoConnected = true;
         this.logger.ok('База данных подключена.');

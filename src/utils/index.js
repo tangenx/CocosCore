@@ -1,16 +1,13 @@
 const fetch = require('node-fetch');
+const { format } = require('date-fns'); 
 
 class Utils {
     static getTimeString() {
-        let date = new Date();
-
-        return date.toLocaleTimeString('ru-RU');
+        return format(new Date(), 'HH:mm:ss');
     }
 
     static getDateString() {
-        let date = new Date();
-
-        return date.toLocaleDateString('ru-RU');
+        return format(new Date(), 'DD.MM.YYYY');
     }
 
     static getRandomInRange(min, max) {

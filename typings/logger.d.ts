@@ -2,7 +2,7 @@ export default class Logger {
     /**
      * @param directory Директория, куда будут сохраняться логи
      */
-    constructor(directory: string);
+    public constructor(directory: string);
 
     public log(...message: any): void;
 

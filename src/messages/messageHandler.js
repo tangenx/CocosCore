@@ -2,7 +2,7 @@ const Utils = require('../utils');
 const chattingCommand = require('../commander/chattingCommand');
 
 async function messageHandler(context, bot) {
-    if (context.out || context.isGroup) return;
+    if (context.isOutbox || context.isGroup) return;
 
     let startTime = Date.now();
 
@@ -19,6 +19,8 @@ async function messageHandler(context, bot) {
 
     if (bot.db) context.user = await bot.db.getUser(context.senderId, bot);
     if (context.isChat && bot.db) context.chat = await bot.db.getChat(context.chatId);
+
+    if (context.user.ban) return;
 
     if (bot.trigger.test(context.text) && context.isChat) {
         context.text = context.text.replace(bot.trigger, '').trim();

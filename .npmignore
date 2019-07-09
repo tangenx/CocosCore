@@ -1,0 +1,5 @@
+docs
+.editorconfig
+.eslintrc.json
+package-lock.json
+.markdownlint.json

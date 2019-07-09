@@ -1,15 +1,13 @@
-const { Schema, model } = require('mongoose');
-
-const userSchema = new Schema({
+const userSchema = {
     vkId: Number,
     nickname: String,
+    ban: {
+        type: Boolean,
+        default: false
+    },
     balance: {
         type: Number,
         default: 5000
-    },
-    gamemode: {
-        type: Boolean,
-        default: false
     },
     lastMessage: {
         type: Number,
@@ -24,8 +22,6 @@ const userSchema = new Schema({
         default: true
     },
     regDate: String
-});
+};
 
-const User = model('User', userSchema);
-
-module.exports = User;
+module.exports = userSchema;

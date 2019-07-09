@@ -12,7 +12,9 @@
 
 ## Установка
 
-> npm i cocoscore
+```bash
+npm i cocoscore
+```
 
 ## Использование
 
