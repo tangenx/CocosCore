@@ -24,6 +24,8 @@ declare class DBManager {
      */
     public getModel(rawName: string): Collection;
 
+    private connectDefaultModels(): void;
+
     /**
      * Получить объект пользователя из БД
      * 

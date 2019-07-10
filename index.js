@@ -36,6 +36,10 @@ class CocosCoreBot {
         this.mongoURI = mongoURI;
 
         this.logger = new Logger(!this.logsDir ? null : `${this.logsDir}/${Utils.getDateString()} ${Utils.getTimeString()}.txt`);
+
+        if (this.mongoURI) {
+            this.connectMongoDB();
+        }        
     }
 
     get [Symbol.toStringTag]() {
@@ -43,9 +47,14 @@ class CocosCoreBot {
     }
 
     async configure() {
-        if (this.isConfigured) return this.logger.warn('Бот уже сконфигурирован');
+        if (this.isConfigured) {
+            return this.logger.warn('Бот уже сконфигурирован');
+        }
 
-        if (!this.token) throw new ConfigureError('Не указан токен бота');
+        if (!this.token) {
+            throw new ConfigureError('Не указан токен бота');
+        }
+
         this.vk = new VK({
             apiLimit: this.apiLimit,
             apiMode: this.apiMode,
@@ -54,11 +63,21 @@ class CocosCoreBot {
 
         await this.vk.updates.start();
 
-        if (!this.groupId) this.groupId = this.vk.options.pollingGroupId;
-        if (this.groupId < 0) this.groupId = -this.groupId;
-        if (this.vk.options.pollingGroupId !== this.groupId) this.groupId = this.vk.options.pollingGroupId;
+        if (!this.groupId) {
+            this.groupId = this.vk.options.pollingGroupId;
+        }
 
-        if (!this.commandsDir) throw new ConfigureError('Не указана директория команд');
+        if (this.groupId < 0) {
+            this.groupId = -this.groupId;
+        }
+        
+        if (this.vk.options.pollingGroupId !== this.groupId) {
+            this.groupId = this.vk.options.pollingGroupId;
+        }
+
+        if (!this.commandsDir) {
+            throw new ConfigureError('Не указана директория команд');
+        }
         this.commander = new Commander();
         await this.commander.loadCommands(this.commandsDir);
 
@@ -66,7 +85,9 @@ class CocosCoreBot {
             this.aliases = this.aliases.split(/,\s*/);
         }
 
-        if (this.aliases.length > 0) this.gamemodeUsers = new Map();
+        if (this.aliases.length > 0) {
+            this.gamemodeUsers = new Map();
+        }
 
         this.trigger = new RegExp(`${this.aliasesFromStart ? '^' : ''}(?:\\[club${this.groupId}\\|(?:.*)\\]${this.aliases.length === 0 ? '' : `|${this.aliases.join('|')}`})\\s*,?(\\s+|$)`, 'i');
 
@@ -74,21 +95,24 @@ class CocosCoreBot {
         this.logger.ok('Сконфигурировано.');
     }
 
-    async connectMongoDB(url) {
-        if (this.isMongoConnected) return this.logger.warn('MongoDB уже подключена');
+    async connectMongoDB() {
+        if (this.isMongoConnected) {
+            return this.logger.warn('MongoDB уже подключена');
+        }
 
-        if (!url && !this.mongoURI) throw new ReferenceError('Не указан URL к базе данных');
-        if (!this.mongoURI) this.mongoURI = url;
-        if (typeof this.mongoURI !== 'string') throw new TypeError('URL должен быть строкой');
+        if (typeof this.mongoURI !== 'string') {
+            throw new TypeError('URI должен быть строкой');
+        }
 
         this.db = new DBManager(this.mongoURI);
-
         this.isMongoConnected = true;
-        this.logger.ok('База данных подключена.');
+        this.isDefaultModelsLoaded = false;
     }
 
     startListener() {
-        if (this.isStarted) return this.logger.warn('Бот уже запущен');
+        if (this.isStarted) {
+            return this.logger.warn('Бот уже запущен');
+        }
 
         this.vk.updates.on(['new_message'], async (context) => {
             await messageHandler(context, this);
@@ -99,11 +123,21 @@ class CocosCoreBot {
     }
 
     async start() {
-        if (!this.isConfigured) await this.configure();
+        if (!this.isConfigured) {
+            await this.configure();
+        }
 
-        if (this.mongoURI && !this.isMongoConnected) await this.connectMongoDB();
+        if (this.mongoURI && !this.isDefaultModelsLoaded) {
+            this.isDefaultModelsLoaded = true;
 
-        if (!this.isStarted) this.startListener();
+            this.db.connectDefaultModels();
+
+            this.logger.ok('База данных подключена.');
+        }
+
+        if (!this.isStarted) {
+            this.startListener();
+        }
     }
 }
 

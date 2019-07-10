@@ -18,17 +18,17 @@ declare class CocosCoreBot {
     /**
      * Конфигурирование бота
      */
-    public configure(): Promise<void>;
+    private configure(): Promise<void>;
 
     /**
      * Подключение MongoDB к боту
      */
-    public connectMongoDB(url: string): Promise<void>;
+    private connectMongoDB(): Promise<void>;
 
     /**
      * Запуск "прослушки" сообщений
      */
-    public startListener(): void;
+    private startListener(): void;
 
     /**
      * Запуск бота

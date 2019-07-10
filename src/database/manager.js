@@ -15,9 +15,6 @@ class DBManager {
 
     constructor(uri) {
         this.connection = mongoose.createConnection(uri, { useNewUrlParser: true });
-
-        this.setModel('user', userSchema);
-        this.setModel('chat', chatSchema);
     }
 
     get [Symbol.toStringTag]() {
@@ -55,7 +52,7 @@ class DBManager {
     }
 
     getModel(rawName) {
-        const name = rawName.toLowerCase();
+        const name = String(rawName).toLowerCase();
         const model = this.models[name];
 
         if (!model) {
@@ -63,6 +60,16 @@ class DBManager {
         }
 
         return model;
+    }
+
+    connectDefaultModels() {
+        if (!('user' in this.models)) {
+            this.setModel('user', userSchema);
+        }
+
+        if (!('chat' in this.models)) {
+            this.setModel('chat', chatSchema);
+        }
     }
 
     async getUser(senderId, bot) {
@@ -73,10 +80,10 @@ class DBManager {
                 user_ids: senderId
             });
 
-            user = new this.User({
+            user = new this.models.user({
                 vkId: senderId,
                 nickname: profile.first_name,
-                regDate: Utils.getDateString()
+                regDate: `${Utils.getDateString()} ${Utils.getTimeString()}`
             });
 
             await user.save();
@@ -88,7 +95,7 @@ class DBManager {
     async getChat(id) {
         let chat = await this.models.chat.findOne({ id: id });
         if (!chat) {
-            chat = new this.Chat({
+            chat = new this.models.chat({
                 id: id
             });
 
