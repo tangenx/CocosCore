@@ -35,6 +35,10 @@ class Utils {
     static getRandomElement(arr) {
         return arr[Math.floor(Math.random() * arr.length)];
     }
+
+    static numberSeparator(num) {
+        return Number(num).toLocaleString().replace(/\,/g, '.');
+    }
 }
 
 module.exports = Utils;

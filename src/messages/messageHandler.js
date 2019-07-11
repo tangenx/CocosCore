@@ -26,38 +26,68 @@ async function messageHandler(context, bot) {
         context.text = context.text.replace(bot.trigger, '').trim();
     }
 
-    context.send = function(text = '', params = {}) {
-        let message = `${!params.emoji ? '' : `${params.emoji} `}`;
-        if (context.isChat) {
-            if (context.user) {
-                message += `${context.user.mention ? `[id${context.user.vkId}|${context.user.nickname}]` : context.user.nickname}, ${!text ? text : `${text[0].toLowerCase()}${text.slice(1)}`}`;
-            } else {
-                message += `${!text ? text : `${text[0].toUpperCase()}${text.slice(1)}`}`;
-            }
+    context.send = function(text, params = {}) {
+        let rawMessage = `${!params.emoji ? '' : `${params.emoji} `}`;
+
+        let messageText;
+        
+        if (typeof text === 'object') {
+            messageText = text.message;
+            delete text.message;
         } else {
-            message += `${!text ? text : `${text[0].toUpperCase()}${text.slice(1)}`}`;
+            messageText = text
         }
 
-        delete params.emoji;
+        if (!messageText) {
+            messageText = ''
+        }
 
-        params.message = message;
-        params.peer_id = context.peerId;
+        if (context.isChat || context.user) {
+            rawMessage += `${context.user && context.user.mention ? `[id${context.user.vkId}|${context.user.nickname}]` : context.user.nickname}, ${!messageText ? messageText : `${messageText[0].toLowerCase()}${messageText.slice(1)}`}`;
+        } else {
+            rawMessage += `${!messageText ? messageText : `${messageText[0].toUpperCase()}${messageText.slice(1)}`}`;
+        }       
 
-        return bot.vk.api.messages.send(params);
+        delete params.emoji;        
+
+        return bot.vk.api.messages.send({
+            peer_id: context.peerId,
+            message: rawMessage,
+            
+            ...(
+				typeof text !== 'object'
+					? {
+						...params
+					}
+					: {
+                        ...text
+                    }
+			)
+        });
     };
 
-    context.error = function(text = '', params = {}) {
+    context.error = function(text, params = {}) {
         context.send(text, Object.assign(params, { emoji: '❌' }));
     };
 
-    context.sendOrig = function(text = '', params = {}) {
-        params.message = text;
-        params.peer_id = context.peerId;
-        return bot.vk.api.messages.send(params);
+    context.sendOrig = function(text, params = {}) {
+        return bot.vk.api.messages.send({
+			peer_id: context.peerId,
+
+			...(
+				typeof text !== 'object'
+					? {
+						message: text,
+
+						...params
+					}
+					: text
+			)
+		});
     };
 
     context.sendSticker = function(id) {
-        return context.sendOrig('', {
+        return context.sendOrig({
             sticker_id: id
         });
     };

@@ -3,3 +3,4 @@ docs
 .eslintrc.json
 package-lock.json
 .markdownlint.json
+.git

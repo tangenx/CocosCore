@@ -10,4 +10,6 @@ export default class Utils {
     public static declOfNum(num: number, titles: string[]): string;
 
     public static getRandomElement(arr: any[]): any;
+
+    public static numberSeparator(num: number | string): string;
 }

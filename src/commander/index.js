@@ -11,7 +11,7 @@ class Commander {
         this.commands = [];
     }
 
-    async loadCommands(dir) {
+    async loadFromDirectory(dir) {
         const absolutePath = await fs.promises.realpath(dir);
         const filePaths = await findFiles(`${absolutePath}/**/*.js`);
 

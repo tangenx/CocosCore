@@ -79,7 +79,7 @@ class CocosCoreBot {
             throw new ConfigureError('Не указана директория команд');
         }
         this.commander = new Commander();
-        await this.commander.loadCommands(this.commandsDir);
+        await this.commander.loadFromDirectory(this.commandsDir);
 
         if (!Array.isArray(this.aliases)) {
             this.aliases = this.aliases.split(/,\s*/);

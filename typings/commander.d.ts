@@ -8,11 +8,11 @@ export default class Commander {
      * Загрузка команд в бота
      * @param dir Директория, где находятся команды бота
      */
-    private loadCommands(dir: string): Promise<void>;
+    private loadFromDirectory(dir: string): Promise<void>;
 
     /**
      * Поиск команды
      * @param context Контекст сообщения
      */
-    private findCommand(context: MessageContext): Command | null;
+    private find(context: MessageContext): Command | null;
 }
