@@ -17,7 +17,7 @@ async function messageHandler(context, bot) {
 
     if (context.isChat && !context.gamemodeUser && bot.gamemodeUsers && !bot.trigger.test(context.text)) return;
 
-    if (bot.db) context.user = await bot.db.getUser(context.senderId, bot);
+    if (bot.db) context.user = await bot.db.getUser(context.senderId, bot);    
     if (context.isChat && bot.db) context.chat = await bot.db.getChat(context.chatId);
 
     if (context.user && context.user.ban) return;
@@ -43,7 +43,7 @@ async function messageHandler(context, bot) {
         }
 
         if (context.isChat || context.user) {
-            rawMessage += `${context.user && context.user.mention ? `[id${context.user.vkId}|${context.user.nickname}]` : context.user.nickname}, ${!messageText ? messageText : `${messageText[0].toLowerCase()}${messageText.slice(1)}`}`;
+            rawMessage += `${context.user ? context.user.mention ? `[id${context.user.vkId}|${context.user.nickname}], ` : `${context.user.nickname}, ` : ''}${!messageText ? messageText : `${messageText[0].toLowerCase()}${messageText.slice(1)}`}`;
         } else {
             rawMessage += `${!messageText ? messageText : `${messageText[0].toUpperCase()}${messageText.slice(1)}`}`;
         }       
