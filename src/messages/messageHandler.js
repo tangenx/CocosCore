@@ -17,12 +17,12 @@ async function messageHandler(context, bot) {
 
     if (context.isChat && !context.gamemodeUser && bot.gamemodeUsers && !bot.trigger.test(context.text)) return;
 
-    if (bot.db) context.user = await bot.db.getUser(context.senderId, bot);    
+    if (bot.db) context.user = await bot.db.getUser(context.senderId, bot);
     if (context.isChat && bot.db) context.chat = await bot.db.getChat(context.chatId);
 
     if (context.user && context.user.ban) return;
 
-    if (bot.trigger.test(context.text) && context.isChat) {
+    if (bot.trigger.test(context.text)) {
         context.text = context.text.replace(bot.trigger, '').trim();
     }
 
