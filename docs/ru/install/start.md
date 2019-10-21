@@ -18,17 +18,20 @@ const bot = new CocosCoreBot(options);
 
 Общие опции:
 
-| Опция             | Тип      | Описание                            | По умолчанию |
-| ----------------- | -------- | ----------------------------------- | ------------ |
-| token             | string   | Токен бота                          | null         |
-| groupId           | number   | ID группы                           | null         |
-| developerId       | number   | ID разработчика                     | null         |
-| commandsDirectory | string   | Директория команд                   | null         |
-| logsDirectory     | string   | Директория хранения логов           | null         |
-| aliases           | string[] | Обращения к боту                    | []           |
-| aliasesFromStart  | boolean  | Обращения к боту с начала сообщения | true         |
-| chatBot           | boolean  | Чат-бот                             | true         |
-| mongoURI          | string   | Адрес сервера с БД                  | null         |
+| Опция                | Тип      | Описание                            | По умолчанию |
+| -------------------- | -------- | ----------------------------------- | ------------ |
+| token                | string   | Токен бота                          | null         |
+| groupId              | number   | ID группы                           | null         |
+| developerId          | number   | ID разработчика                     | null         |
+| commandsDirectory    | string   | Директория команд                   | null         |
+| logsDirectory        | string   | Директория хранения логов           | null         |
+| aliases              | string[] | Обращения к боту                    | []           |
+| aliasesFromStart     | boolean  | Обращения к боту с начала сообщения | true         |
+| chatBot              | boolean  | Чат-бот                             | true         |
+| mongoURI             | string   | Адрес сервера с БД                  | null         |
+| handleMessagePayload | boolean  | Обрабатывать клавиатуру             | false        |
+
+Бот будет принимать сообщения с кнопок тогда и только тогда, когда в payload кнопки есть значение command.
 
 Сервис чат-бота можно изменить в файле src/commander/chattingCommand.js
 

@@ -110,7 +110,7 @@ interface IMessageParams {
 
 declare class Message extends MessageContext {
     /**
-     * Находится ли юзер в игровом режите (только при наличии алиасов)
+     * Находится ли юзер в игровом режиме (только при наличии алиасов)
      */
     public gamemodeUser: boolean;
     /**
@@ -182,6 +182,11 @@ export interface IBotConfigure {
      * Адрес MongoDB сервера
      */
     mongoURI?: string;
+
+    /**
+     * Обрабатывать кнопки (только если они несут в себе payload с параметром command)
+     */
+    handleMessagePayload: boolean;
 }
 
 export interface ICommandParams {

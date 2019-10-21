@@ -1,6 +1,6 @@
 {
   "name": "cocoscore",
-  "version": "1.0.2-rc.3",
+  "version": "1.0.2-rc.4",
   "description": "VK Bot core, based on vk-io module",
   "main": "./index.js",
   "types": "./index.d.ts",

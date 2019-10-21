@@ -6,28 +6,32 @@ async function messageHandler(context, bot) {
 
     let startTime = Date.now();
 
-    if (bot.gamemodeUsers) {
-        context.gamemodeUser = bot.gamemodeUsers.get(context.senderId);
-    }
-
-    if (!context.gamemodeUser && bot.gamemodeUsers) {
-        bot.gamemodeUsers.set(context.senderId, false);
-        context.gamemodeUser = false;
-    }
-
-    if (context.isChat && !context.gamemodeUser && bot.gamemodeUsers && !bot.trigger.test(context.text)) return;
-
-    if (bot.db) context.user = await bot.db.getUser(context.senderId, bot);
-    if (context.isChat && bot.db) context.chat = await bot.db.getChat(context.chatId);
-
-    if (context.user && context.user.ban) return;
-
-    if (bot.trigger.test(context.text)) {
-        context.text = context.text.replace(bot.trigger, '').trim();
+    if (context.hasMessagePayload && bot.handleMessagePayload) {
+        context.text = context.messagePayload.command;
+    } else {
+        if (bot.gamemodeUsers) {
+            context.gamemodeUser = bot.gamemodeUsers.get(context.senderId);
+        }
+    
+        if (!context.gamemodeUser && bot.gamemodeUsers) {
+            bot.gamemodeUsers.set(context.senderId, false);
+            context.gamemodeUser = false;
+        }
+    
+        if (context.isChat && !context.gamemodeUser && bot.gamemodeUsers && !bot.trigger.test(context.text)) return;
+    
+        if (bot.db) context.user = await bot.db.getUser(context.senderId, bot);
+        if (context.isChat && bot.db) context.chat = await bot.db.getChat(context.chatId);
+    
+        if (context.user && context.user.ban) return;
+    
+        if (bot.trigger.test(context.text)) {
+            context.text = context.text.replace(bot.trigger, '').trim();
+        }
     }
 
     context.send = function(text, params = {}) {
-        let rawMessage = `${!params.emoji ? '' : `${params.emoji} `}`;
+        let message = `${!params.emoji ? '' : `${params.emoji} `}`;
 
         let messageText;
         
@@ -42,17 +46,34 @@ async function messageHandler(context, bot) {
             messageText = ''
         }
 
-        if (context.isChat || context.user) {
-            rawMessage += `${context.user ? context.user.mention ? `[id${context.user.vkId}|${context.user.nickname}], ` : `${context.user.nickname}, ` : ''}${!messageText ? messageText : `${messageText[0].toLowerCase()}${messageText.slice(1)}`}`;
-        } else {
-            rawMessage += `${!messageText ? messageText : `${messageText[0].toUpperCase()}${messageText.slice(1)}`}`;
-        }       
+        let rawMessage = {
+            text: '',
+            mention: ''
+        }
 
-        delete params.emoji;        
+        if (context.isChat || context.user) {
+            if (!context.user) {
+                rawMessage.text = !messageText
+                    ? messageText
+                    : `${messageText[0].toUpperCase()}${messageText.slice(1)}`;
+            } else {
+                rawMessage.mention = context.user.mention
+                    ? `[id${context.user.vkId}|${context.user.nickname}], `
+                    : `${context.user.nickname}, `;
+            }
+        } else {
+            rawMessage.text = !messageText
+                ? messageText
+                : `${messageText[0].toUpperCase()}${messageText.slice(1)}`;
+        }
+
+        message += `${rawMessage.mention}${rawMessage.text}`;
+
+        delete params.emoji;
 
         return bot.vk.api.messages.send({
             peer_id: context.peerId,
-            message: rawMessage,
+            message: message,
             
             ...(
 				typeof text !== 'object'

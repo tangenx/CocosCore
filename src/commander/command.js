@@ -42,6 +42,10 @@ class Command {
 
         context.body = context.body[1].match(command.trigger);
 
+        if (command.commands.length) {
+            return command.searchSubCommand(context);
+        }        
+
         return command;
     }
 }

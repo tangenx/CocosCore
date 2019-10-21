@@ -11,9 +11,8 @@ const defaultNameModels = {
 };
 
 class DBManager {
-    models = {};
-
     constructor(uri) {
+        this.models = {};
         this.connection = mongoose.createConnection(uri, { useNewUrlParser: true });
     }
 

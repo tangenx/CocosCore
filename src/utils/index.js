@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const { format } = require('date-fns'); 
+const { format } = require('date-fns');
 
 class Utils {
     static getTimeString() {
