@@ -10,14 +10,21 @@ class Command {
         commands = [],
         permission = 0
     }) {
-        if (!trigger) throw new ConfigureError('Не указан триггер команды');
+        if (!trigger) {
+            throw new ConfigureError('Не указан триггер команды');
+        }
 
         this.trigger = trigger;
         this.name = name;
         this.description = description;
 
-        if (!handler) throw new ConfigureError('Не указан обработчик команды');
-        if (typeof handler !== 'function') throw new ConfigureError('Обработчик команды не является функцией');
+        if (!handler) {
+            throw new ConfigureError('Не указан обработчик команды');
+        }
+
+        if (typeof handler !== 'function') {
+            throw new ConfigureError('Обработчик команды не является функцией');
+        }
 
         this.handler = handler;
         this.emoji = emoji;
@@ -30,15 +37,21 @@ class Command {
     }
 
     searchSubCommand(context) {
-        if (!this.commands.length) return this;
+        if (!this.commands.length) {
+            return this;
+        }
 
         let command;
 
         for (const subCommand of this.commands) {            
-            if (subCommand.trigger.test(context.body[1])) command = subCommand;
+            if (subCommand.trigger.test(context.body[1])) {
+                command = subCommand;
+            }
         }
 
-        if (!command) return this;
+        if (!command) {
+            return this;
+        }
 
         context.body = context.body[1].match(command.trigger);
 

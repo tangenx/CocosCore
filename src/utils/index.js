@@ -15,12 +15,12 @@ class Utils {
     }
 
     static async getBuffer(url) {
-        let response = await fetch(url);
+        const response = await fetch(url);
         return response.buffer();
     }
 
     static declOfNum(num, titles) {
-        let cases = [2, 0, 1, 1, 1, 2];
+        const cases = [2, 0, 1, 1, 1, 2];
 
         return titles[
             (
@@ -37,7 +37,7 @@ class Utils {
     }
 
     static numberSeparator(num) {
-        return Number(num).toLocaleString().replace(/\,/g, '.');
+        return Number(num).toLocaleString().replace(/,/g, '.');
     }
 }
 

@@ -50,17 +50,19 @@ class Commander {
             if (command.trigger.test(context.text)) foundCommand = command;
         }
 
-        if (!foundCommand) return null;
+        if (!foundCommand) {
+            return null;
+        }
 
         context.body = context.text.match(foundCommand.trigger);
 
-        let command = foundCommand.searchSubCommand(context);
+        const command = foundCommand.searchSubCommand(context);
 
         return command;
     }
 
     watchDirectory(logger) {
-        fs.watch(this.commandsDirectory, { encoding: 'utf8', recursive: true,  }, async (event) => {
+        fs.watch(this.commandsDirectory, { encoding: 'utf8', recursive: true  }, async (event) => {
             if (event === 'rename' || Date.now() - this.lastCheckDirectory < 200) {
                 return;
             }

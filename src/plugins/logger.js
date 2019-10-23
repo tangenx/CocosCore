@@ -19,7 +19,7 @@ class Logger {
             ok: '\u001B[42m  OK  \u001B[0m',
             error: '\u001B[41m ERRO \u001B[0m',
             warn: '\u001B[43m WARN \u001B[0m',
-            info: '\u001B[44m INFO \u001B[0m',
+            info: '\u001B[44m INFO \u001B[0m'
         };
 
         for (const key in this.prefixes) {

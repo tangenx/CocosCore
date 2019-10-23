@@ -2,9 +2,11 @@ const Utils = require('../utils');
 const chattingCommand = require('../commander/chattingCommand');
 
 async function messageHandler(context, bot) {
-    if (context.isOutbox || context.isGroup) return;
+    if (context.isOutbox || context.isGroup) {
+        return;
+    }
 
-    let startTime = Date.now();
+    const startTime = Date.now();
 
     if (context.hasMessagePayload && bot.handleMessagePayload) {
         context.text = context.messagePayload.command;
@@ -18,12 +20,21 @@ async function messageHandler(context, bot) {
             context.gamemodeUser = false;
         }
     
-        if (context.isChat && !context.gamemodeUser && bot.gamemodeUsers && !bot.trigger.test(context.text)) return;
+        if (context.isChat && !context.gamemodeUser && bot.gamemodeUsers && !bot.trigger.test(context.text)) {
+            return;
+        }
     
-        if (bot.db) context.user = await bot.db.getUser(context.senderId, bot);
-        if (context.isChat && bot.db) context.chat = await bot.db.getChat(context.chatId);
+        if (bot.db) {
+            context.user = await bot.db.getUser(context.senderId, bot);
+        }
+
+        if (context.isChat && bot.db) {
+            context.chat = await bot.db.getChat(context.chatId);
+        }
     
-        if (context.user && context.user.ban) return;
+        if (context.user && context.user.ban) {
+            return;
+        }
     
         if (bot.trigger.test(context.text)) {
             context.text = context.text.replace(bot.trigger, '').trim();
@@ -39,17 +50,17 @@ async function messageHandler(context, bot) {
             messageText = text.message;
             delete text.message;
         } else {
-            messageText = text
+            messageText = text;
         }
 
         if (!messageText) {
-            messageText = ''
+            messageText = '';
         }
 
-        let rawMessage = {
+        const rawMessage = {
             text: '',
             mention: ''
-        }
+        };
 
         if (context.isChat || context.user) {
             if (!context.user) {
@@ -76,35 +87,35 @@ async function messageHandler(context, bot) {
             message: message,
             
             ...(
-				typeof text !== 'object'
-					? {
-						...params
-					}
-					: {
+                typeof text !== 'object'
+                    ? {
+                        ...params
+                    }
+                    : {
                         ...text
                     }
-			)
+            )
         });
     };
 
     context.error = function(text, params = {}) {
-        context.send(text, Object.assign(params, { emoji: '❌' }));
+        return context.send(text, Object.assign(params, { emoji: '❌' }));
     };
 
     context.sendOrig = function(text, params = {}) {
         return bot.vk.api.messages.send({
-			peer_id: context.peerId,
+            peer_id: context.peerId,
 
-			...(
-				typeof text !== 'object'
-					? {
-						message: text,
+            ...(
+                typeof text !== 'object'
+                    ? {
+                        message: text,
 
-						...params
-					}
-					: text
-			)
-		});
+                        ...params
+                    }
+                    : text
+            )
+        });
     };
 
     context.sendSticker = function(id) {
@@ -118,7 +129,9 @@ async function messageHandler(context, bot) {
         if (bot.chatBot && bot.gamemodeUsers && !context.gamemodeUser || context.gamemodeUser && !context.isChat) {
             command = chattingCommand;
         } else {
-            if (context.isChat) return;
+            if (context.isChat) {
+                return;
+            }
             return context.error('команда не найдена! Проверьте правильность введённых данных и попробуйте ещё раз.');
         }
     }
@@ -139,10 +152,15 @@ async function messageHandler(context, bot) {
         }
     }
 
-    if (bot.db) await context.user.save();
-    if (context.isChat && bot.db) await context.chat.save();
+    if (bot.db) {
+        await context.user.save();
+    }
 
-    let endTime = Date.now();
+    if (context.isChat && bot.db) {
+        await context.chat.save();
+    }
+
+    const endTime = Date.now();
 
     bot.logger.log(`${Utils.getTimeString()} [${context.isChat ? `chat #${context.chatId}` : 'личка'}] ${context.senderId} => ${context.text} (${endTime - startTime} ms.)`);
 }

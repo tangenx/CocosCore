@@ -75,7 +75,7 @@ class DBManager {
         let user = await this.models.user.findOne({ vkId: senderId });
 
         if (!user) {
-            const [profile] = await bot.vk.api.users.get({
+            const [ profile ] = await bot.vk.api.users.get({
                 user_ids: senderId
             });
 

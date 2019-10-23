@@ -84,6 +84,7 @@ class CocosCoreBot {
         if (!this.commandsDir) {
             throw new ConfigureError('Не указана директория команд');
         }
+        
         this.commander = new Commander();
         await this.commander.loadFromDirectory(this.commandsDir);
         this.commander.watchDirectory(this.logger);

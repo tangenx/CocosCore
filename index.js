@@ -4,4 +4,4 @@ module.exports = {
     CocosCoreBot,
     Command,
     Utils
-}
+};

@@ -4,7 +4,7 @@ const request = require('../plugins/request');
 module.exports = new Command({
     trigger: /^[^]+$/i,
     async handler(ctx, bot) {
-        let data = await request('http://isinkin-bot-api.herokuapp.com/1/talk', {
+        const { text } = await request('http://isinkin-bot-api.herokuapp.com/1/talk', {
             method: 'POST',
             form: {
                 q: !ctx.text ? '1337' : ctx.text,
@@ -21,7 +21,7 @@ module.exports = new Command({
             json: true
         });
 
-        /* let data = await request('https://xu.su/api/send', {
+        /* let { text } = await request('https://xu.su/api/send', {
             method: 'POST',
             form: {
                 bot: 'main',
@@ -31,6 +31,6 @@ module.exports = new Command({
             json: true
         }); */
 
-        ctx.send(data.text);
+        ctx.send(text);
     }
 });

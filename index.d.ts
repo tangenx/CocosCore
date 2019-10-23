@@ -4,4 +4,4 @@ export {
     CocosCoreBot,
     Command,
     Utils
-}
+};

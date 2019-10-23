@@ -16,6 +16,11 @@ declare class CocosCoreBot {
     public constructor(params: Params.IBotConfigure);
 
     /**
+     * Запуск бота
+     */
+    public start(): void;
+    
+    /**
      * Конфигурирование бота
      */
     private configure(): Promise<void>;
@@ -29,11 +34,6 @@ declare class CocosCoreBot {
      * Запуск "прослушки" сообщений
      */
     private startListener(): void;
-
-    /**
-     * Запуск бота
-     */
-    public start(): void;
 }
 
 export { CocosCoreBot, Command, Utils };
