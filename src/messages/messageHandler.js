@@ -63,20 +63,24 @@ async function messageHandler(context, bot) {
         };
 
         if (context.isChat || context.user) {
-            if (!context.user) {
-                rawMessage.text = !messageText
-                    ? messageText
-                    : `${messageText[0].toUpperCase()}${messageText.slice(1)}`;
-            } else {
+            if (context.user) {
                 rawMessage.mention = context.user.mention
                     ? `[id${context.user.vkId}|${context.user.nickname}], `
                     : `${context.user.nickname}, `;
+
+                rawMessage.text = !messageText
+                    ? messageText
+                    : `${messageText[0].toLowerCase()}${messageText.slice(1)}`;
+            } else {
+                rawMessage.text = !messageText
+                    ? messageText
+                    : `${messageText[0].toUpperCase()}${messageText.slice(1)}`;
             }
         } else {
             rawMessage.text = !messageText
                 ? messageText
                 : `${messageText[0].toUpperCase()}${messageText.slice(1)}`;
-        }
+        }        
 
         message += `${rawMessage.mention}${rawMessage.text}`;
 

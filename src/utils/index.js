@@ -7,7 +7,7 @@ class Utils {
     }
 
     static getDateString() {
-        return format(new Date(), 'DD.MM.YYYY');
+        return format(new Date(), 'dd.MM.yyyy');
     }
 
     static getRandomInRange(min, max) {
