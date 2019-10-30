@@ -25,6 +25,7 @@
     ],
     "rules": {
         "require-atomic-updates": "off",
+        "@typescript-eslint/no-explicit-any": "off",
         "comma-dangle": ["error", "never"],
         "@typescript-eslint/interface-name-prefix": ["error", "always"],
         "@typescript-eslint/camelcase": ["error", {

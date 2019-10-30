@@ -1,5 +1,4 @@
 const xml2js = require('xml2js');
-const querystring = require('querystring');
 const fetch = require('node-fetch');
 const FormData = require('form-data');
 
@@ -14,7 +13,7 @@ module.exports = async function request(url, data = {}) {
     data.method = data.method || data.form ? 'POST' : 'GET';
 
     if (data.form) {
-        data.body = querystring.stringify(data.form);
+        data.body = new URLSearchParams(data.form).toString();
         Object.assign(data.headers, {
             'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
         });

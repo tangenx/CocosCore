@@ -5,3 +5,4 @@ examples
 package-lock.json
 .markdownlint.json
 .git
+.travis.yml
