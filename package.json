@@ -1,39 +1,16 @@
 {
-  "name": "cocoscore",
-  "version": "1.0.4",
-  "description": "VK Bot core, based on vk-io module",
-  "main": "./index.js",
-  "types": "./index.d.ts",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/TGXed/CocosCore.git"
-  },
-  "keywords": [
-    "vkbot",
-    "core",
-    "vkbot-core",
-    "vk",
-    "bot"
+  "name": "cocoscore-monorepo",
+  "private": true,
+  "workspaces": [
+    "packages/*"
   ],
-  "author": "TGX",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/TGXed/CocosCore/issues"
-  },
-  "homepage": "https://github.com/TGXed/CocosCore#readme",
-  "dependencies": {
-    "date-fns": "^2.5.1",
-    "form-data": "^2.5.1",
-    "glob": "^7.1.5",
-    "mongoose": "^5.7.6",
-    "node-fetch": "^2.6.0",
-    "vk-io": "^4.0.0-rc.25",
-    "xml2js": "^0.4.22"
+  "engines": {
+    "node": ">=8.0.0"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^2.5.0",
-    "@typescript-eslint/parser": "^2.5.0",
-    "eslint": "^6.5.1",
-    "typescript": "^3.6.4"
+    "@typescript-eslint/eslint-plugin": "^2.7.0",
+    "@typescript-eslint/parser": "^2.7.0",
+    "eslint": "^6.6.0",
+    "typescript": "^3.7.2"
   }
 }

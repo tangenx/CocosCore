@@ -1,0 +1,37 @@
+{
+  "name": "cocoscore",
+  "version": "2.0.0",
+  "description": "VK Bot core, based on vk-io module",
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TGXed/CocosCore.git"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "keywords": [
+    "vkbot",
+    "core",
+    "vkbot-core",
+    "vk",
+    "bot",
+    "vkontakte",
+    "api",
+    "node",
+    "js"
+  ],
+  "author": "TGX",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TGXed/CocosCore/issues"
+  },
+  "homepage": "https://github.com/TGXed/CocosCore#readme",
+  "dependencies": {
+    "vk-io": "^4.0.0-rc.30"
+  },
+  "devDependencies": {
+    "debug": "^4.1.1"
+  }
+}

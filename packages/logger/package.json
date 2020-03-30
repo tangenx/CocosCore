@@ -1,0 +1,28 @@
+{
+  "name": "@cocoscore/logger",
+  "version": "1.0.0",
+  "description": "Logger for cocoscore",
+  "main": "./index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TGXed/CocosCore.git"
+  },
+  "keywords": [
+    "cocoscore",
+    "logger",
+    "log",
+    "vk"
+  ],
+  "author": "TGX",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TGXed/CocosCore/issues"
+  },
+  "homepage": "https://github.com/TGXed/CocosCore#readme",
+  "engines": {
+		"node": ">=8.0.0"
+  },
+  "peerDependencies": {
+    "cocoscore": "^2.0.0"
+  }
+}

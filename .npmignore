@@ -1,8 +1,0 @@
-docs
-examples
-.editorconfig
-.eslintrc.json
-package-lock.json
-.markdownlint.json
-.git
-.travis.yml

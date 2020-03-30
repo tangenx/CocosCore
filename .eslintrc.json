@@ -1,15 +1,19 @@
 {
     "env": {
-        "node": true,
-        "es6": true
+        "commonjs": true,
+        "es6": true,
+        "node": true
     },
-    "parser": "@typescript-eslint/parser",
-    "plugins": ["@typescript-eslint"],
     "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended"
     ],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaVersion": 2018,
         "sourceType": "module"
@@ -23,14 +27,17 @@
           }
         }
     ],
+    "plugins": [
+        "@typescript-eslint"
+    ],
     "rules": {
-        "require-atomic-updates": "off",
         "@typescript-eslint/no-explicit-any": "off",
-        "comma-dangle": ["error", "never"],
-        "@typescript-eslint/interface-name-prefix": ["error", "always"],
+        "@typescript-eslint/interface-name-prefix": ["error", "never"],
         "@typescript-eslint/camelcase": ["error", {
 			"properties": "never"
-		}],
+        }],
+        //"require-atomic-updates": "off",
+        "comma-dangle": ["error", "never"],
         "indent": [
             "error",
             4
